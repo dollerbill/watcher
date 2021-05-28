@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rate These Movies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Streaming service</th>
+      <th>Length</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each do |movie| %>
+
+    <% reaction = if signed_in? && current_user.id == 1
+                    :user_1_reaction
+                  else
+                    :user_2_reaction
+                  end %>
+      <tr>
+        <td><%= movie.name %></td>
+        <td align="center"><%= movie.streaming_service %></td>
+        <td><%= movie.length %></td>
+        <td><img src="<%= movie.image_url %>" height="100"> </td>
+        <td><%= button_to 'Thumbs Up', movie, method: :patch, params: { movie: { "#{reaction}": 'thumbs_up' } } %></td>
+        <td><%= button_to 'Thumbs Down', movie, method: :patch, params: { movie: { "#{reaction}": 'thumbs_down' } } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
