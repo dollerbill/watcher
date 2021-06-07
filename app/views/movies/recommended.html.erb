@@ -9,7 +9,6 @@
     <th>Streaming service</th>
     <th>Length</th>
     <th></th>
-    <th>User 2 reaction</th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -19,15 +18,12 @@
     <tr>
       <td><%= movie.name.capitalize %></td>
       <td><%= movie.streaming_service.capitalize %></td>
-      <td><%= movie.length.minutes %> minutes</td>
-<!--      <td><%#= movie.user1_reaction %></td>-->
-<!--      <td><%#= movie.user_2_reaction %></td>-->
+      <td><%= movie.length %> minutes</td>
 <!--      <td><%#= movie.poster %></td>-->
     </tr>
   <% end %>
   </tbody>
 </table>
-
+<%= link_to 'Rate Movies', root_path %>
+<%= link_to 'All Movies', movies_path %>
 <br>
-
-<%= link_to 'New Movie', new_movie_path %>

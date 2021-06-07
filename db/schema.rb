@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,29 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_519_054_023) do
+ActiveRecord::Schema.define(version: 2021_05_19_054023) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'movies', force: :cascade do |t|
-    t.string 'name', null: false
-    t.string 'streaming_service', null: false
-    t.integer 'length', null: false
-    t.string 'user_1_reaction'
-    t.string 'user_2_reaction'
-    t.string 'image_url'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "movies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "streaming_service", null: false
+    t.integer "length", null: false
+    t.string "user_1_reaction"
+    t.string "user_2_reaction"
+    t.string "image_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.string 'email', null: false
-    t.string 'encrypted_password', limit: 128, null: false
-    t.string 'confirmation_token', limit: 128
-    t.string 'remember_token', limit: 128, null: false
-    t.index ['email'], name: 'index_users_on_email'
-    t.index ['remember_token'], name: 'index_users_on_remember_token'
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "email", null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128, null: false
+    t.string "streaming_services", default: [], null: false, array: true
+    t.string "partner_email", null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["partner_email"], name: "index_users_on_partner_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
+
 end

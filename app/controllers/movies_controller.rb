@@ -1,14 +1,28 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
-  # require signed in
+  # before_action :require_login
   before_action :set_movie, only: %i[show edit update]
 
   # GET /movies
   def index
-    @movies = Movie.order(Arel.sql('RANDOM()'))
-                   .where(user_reaction => nil)
-                   .limit(5)
+    @movies = Movie.where(user_reaction => 'thumbs_up').limit(50)
+    # @movies = Movie.order(Arel.sql('RANDOM()'))
+    #                .where(user_reaction => nil)
+    #                .limit(5)
+  end
+
+  def streaming_service
+    @movies = Movie.where(movie_params).limit(50).all
+    # TODO: paginate
+    render :index
+  end
+
+  def rate
+    @movie = Movie.order(Arel.sql('RANDOM()'))
+                  .where(user_reaction => nil)
+                  .first
+    # TODO: limit(5) ?
   end
 
   def recommended
@@ -29,7 +43,8 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   def update
     if @movie.update(movie_params)
-      redirect_to movies_path
+      redirect_to rate_path
+      # redirect_to movies_path
     else
       render :edit
     end
