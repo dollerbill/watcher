@@ -1,5 +1,6 @@
 body {
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-image:url(http://s3.amazonaws.com/codecademy-content/projects/bolt-network/diagmonds_@2X.png);
   color: #333;
   margin: 33px;
 }

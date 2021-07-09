@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_054023) do
+ActiveRecord::Schema.define(version: 2021_07_08_050433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "name", null: false
@@ -24,6 +29,17 @@ ActiveRecord::Schema.define(version: 2021_05_19_054023) do
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "imdb_id"
+  end
+
+  create_table "user_reactions", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "reaction", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_user_reactions_on_movie_id"
+    t.index ["user_id"], name: "index_user_reactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,9 +50,9 @@ ActiveRecord::Schema.define(version: 2021_05_19_054023) do
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
     t.string "streaming_services", default: [], null: false, array: true
-    t.string "partner_email", null: false
+    t.bigint "group_id"
     t.index ["email"], name: "index_users_on_email"
-    t.index ["partner_email"], name: "index_users_on_partner_email"
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 

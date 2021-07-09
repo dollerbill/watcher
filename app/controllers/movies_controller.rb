@@ -6,27 +6,38 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
-    @movies = Movie.where(user_reaction => 'thumbs_up').limit(50)
-    # @movies = Movie.order(Arel.sql('RANDOM()'))
-    #                .where(user_reaction => nil)
-    #                .limit(5)
+    @movies = Movie.all
   end
 
+  def rated_movies
+    if current_user.user_reactions.any?
+      @movies = current_user.user_reactions.positive.map(&:movie)
+    else
+      render :rate_movies
+    end
+
+  # @movies = Movie.order(Arel.sql('RANDOM()'))
+  #                .where(user_reaction => nil)
+  #                .limit(5)
+end
+
   def streaming_service
-    @movies = Movie.where(movie_params).limit(50).all
+    @movies = Movie.where(movie_params).limit(50)
     # TODO: paginate
     render :index
   end
 
   def rate
+    previously_rated = current_user&.user_reactions&.map(&:movie_id)
+
     @movie = Movie.order(Arel.sql('RANDOM()'))
-                  .where(user_reaction => nil)
+                  .where.not(id: previously_rated)
                   .first
-    # TODO: limit(5) ?
   end
 
   def recommended
-    @movies = Movie.select(&:match?)
+    # TODO: user.group_id ||= Group.create.id
+    @movies = current_user.group.user_reactions.positive.map(&:movie)
   end
 
   # GET /movies/1
@@ -43,8 +54,8 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   def update
     if @movie.update(movie_params)
-      redirect_to rate_path
-      # redirect_to movies_path
+      # redirect_to root_path
+      redirect_to movies_path
     else
       render :edit
     end
@@ -59,15 +70,6 @@ class MoviesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def movie_params
-    params.require(:movie).permit(:name, :streaming_service, :length, :user_1_reaction, :user_2_reaction)
-  end
-
-  def user_reaction
-    case current_user&.id
-    when 1
-      :user_1_reaction
-    when 2
-      :user_2_reaction
-    end
+    params.require(:movie).permit(:name, :streaming_service, :length)
   end
 end

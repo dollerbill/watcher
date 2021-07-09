@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    binding.pry
     @user = User.new
   end
 
@@ -21,8 +22,8 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    binding.pry
     @user = User.new(user_params)
-
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
     else
@@ -45,6 +46,10 @@ class UsersController < ApplicationController
     redirect_to users_url, notice: 'User was successfully destroyed.'
   end
 
+  def invite
+    # User.create(user_params)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -54,6 +59,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:email, :partner_email, :password)
+    params.require(:user).permit(:email, :group_id, :partner_email, :password)
   end
 end
