@@ -16,10 +16,10 @@ class MoviesController < ApplicationController
       render :rate_movies
     end
 
-  # @movies = Movie.order(Arel.sql('RANDOM()'))
-  #                .where(user_reaction => nil)
-  #                .limit(5)
-end
+    # @movies = Movie.order(Arel.sql('RANDOM()'))
+    #                .where(user_reaction => nil)
+    #                .limit(5)
+  end
 
   def streaming_service
     @movies = Movie.where(movie_params).limit(50)

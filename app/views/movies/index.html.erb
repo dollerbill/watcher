@@ -2,12 +2,12 @@
 
 <h1>All Movies</h1>
 
-<table>
-  <thead>
-  <tr>
-    <div>
+
+<div class="album py-5 bg-dark">
+  <div class="container">
+    <div class="row">
       <%= form_with url: movies_path, method: :get, model: Movie do |form| %>
-      <%#= form_with url: streaming_service_path, method: :get, model: Movie do |form| %>
+        <%#= form_with url: streaming_service_path, method: :get, model: Movie do |form| %>
         <%= form.select :streaming_service, %w[hulu netflix plex prime]%>
         <%= form.button "Filter" %>
       <% end %>
@@ -15,31 +15,31 @@
       <br>
       <%= button_to "All movies", rated_movies_path, method: :get %>
     </div>
-  </tr>
-    <tr>
-      <th>Name</th>
-      <th>Streaming service</th>
-      <th>Length</th>
 
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr align="center">
-        <td>
-          <img src="<%= movie.image_url %>" height="100">
-          <br />
-          <%= movie.name %>
-        </td>
-        <td align="center"><%= movie.streaming_service %></td>
-        <td><%= movie.length %></td>
-<!--        <td><img src="<%#= movie.image_url %>" height="100"> </td>-->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Rate Movies', root_path %>
-<br>
-<%= link_to 'Recommended Movies', recommended_path %>
-<br>
+    <div class="row">
+      <% @movies.each do |movie| %>
+        <div class="col-md-6">
+          <div class="card mb-6 shadow-sm">
+            <img src="<%= movie.image_url %>" style="max-height: 600px;" />
+            <div class="card-body">
+              <p class="card-text"><%= movie.name %></p>
+              <p class="card-text">Available on <%= movie.streaming_service.capitalize %> </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <!--                  TODO: Which is better-->
+                    <%= link_to 'Details', movie_path(movie) %>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">
+                    <a href="/movies/<%= movie.id%> ">Show</a>
+                  </button>
+                </div>
+                <small class="text-muted"><%= movie.length %> minutes</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

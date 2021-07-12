@@ -5,5 +5,4 @@ class UserReaction < ApplicationRecord
   belongs_to :user
 
   enum reaction: %i[negative positive]
-
 end
