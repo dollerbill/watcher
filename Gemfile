@@ -14,6 +14,7 @@ gem 'puma', '~> 5.0'
 
 gem 'clearance'
 gem 'plex-ruby'
+gem 'mailgun-ruby', '~> 1.2', '>= 1.2.5'
 
 group :development, :test do
   gem 'dotenv-rails'
