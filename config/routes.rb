@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'movies#rate'
+  get 'rated_movies' => 'movies#rated_movies'
   get 'recommended' => 'movies#recommended'
   get 'streaming_service' => 'movies#streaming_service'
-  get 'rated_movies' => 'movies#rated_movies'
+  # get 'invite' => 'users#invite'
   post 'reaction' => 'user_reactions#rate'
-  resources :movies
+  post 'users' => 'users#create'
+  root 'movies#rate'
+  resources :invites, :movies
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

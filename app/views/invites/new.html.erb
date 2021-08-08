@@ -1,0 +1,17 @@
+<h2>Invite a friend</h2>
+<%= form_for @invite do |form| %>
+
+  <div class="text-field">
+    <%= form.label :invite_name %>
+    <%= form.text_field :invite_name %>
+  </div>
+
+  <div class="text-field">
+    <%= form.label :invite_email %>
+    <%= form.text_field :invite_email, type: 'email' %>
+  </div>
+<br>
+  <div class="submit-field">
+    <%= form.submit 'Send Invite' %>
+  </div>
+<% end %>

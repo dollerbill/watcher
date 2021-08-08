@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Invites</h1>
+<br>
+<h4>Invite a friend to rate and find movies to watch together!</h4>
+<button class="link-to"><%= link_to 'Send an Invite', new_invite_path %> </button>
+
+<h1>Sent Invites</h1>
+<br>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col">Invitee Name</th>
+    <th scope="col">Invitee Email</th>
+    <th scope="col">Invite Accepted?</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @invites.each do |invite| %>
+    <tr>
+      <th scope="row"></th>
+      <td><%= invite.invite_name %></td>
+      <td><%= invite.invite_email %></td>
+      <td><%= invite.accepted_at.nil? ? 'No' : 'Yes' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
