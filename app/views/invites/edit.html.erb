@@ -1,0 +1,7 @@
+<%= form_for @invite do |form| %>
+  <%= render partial: '/invites/password', locals: { form: form } %>
+<br>
+  <div class="submit-field">
+    <%= form.submit 'Sign up' %>
+  </div>
+<% end %>
