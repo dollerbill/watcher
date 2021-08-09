@@ -14,13 +14,7 @@
               <p class="card-text">Available on <%= movie.streaming_service.capitalize %> </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <!--                  TODO: Which is better-->
-                    <%= link_to 'Details', movie_path(movie) %>
-                  </button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">
-                    <a href="/movies/<%= movie.id%> ">Show</a>
-                  </button>
+                  <%= button_to 'Details', movie_path(movie), method: :get %>
                 </div>
                 <small class="text-muted"><%= movie.length %> minutes</small>
               </div>

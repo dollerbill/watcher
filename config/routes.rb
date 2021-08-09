@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'rated_movies' => 'movies#rated_movies'
+  get 'rated' => 'movies#rated'
   get 'recommended' => 'movies#recommended'
   get 'streaming_service' => 'movies#streaming_service'
   # get 'invite' => 'users#invite'
