@@ -1,35 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @movie.name %>
-</p>
-
-<p>
-  <strong>Streaming service:</strong>
-  <%= @movie.streaming_service %>
-</p>
-
-<p>
-  <strong>Length:</strong>
-  <%= @movie.length %>
-</p>
-
-<p>
-  <strong>User 1 reaction:</strong>
-  <%= @movie.user_1_reaction %>
-</p>
-
-<p>
-  <strong>User 2 reaction:</strong>
-  <%= @movie.user_2_reaction %>
-</p>
-
-<p>
-  <strong>Movie Poster:</strong>
-  <img src='https://th.bing.com/th/id/OIP.Jcf0J9BSRtLYtzokzcgPRgHaKj?pid=ImgDet&rs=1' height="100">
-  <%#= @movie.poster %>
-</p>
-
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<container>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col" align="center">
+      <img src="<%= @movie.image_url %>" height="400" align="center" />
+      <div class="centered">
+        <h5> <%= @movie.name %> </h5>
+        <p> Available on: <%= @movie.streaming_service %> </p>
+        <p> Runtime: <%= @movie.length %> minutes </p>
+        <a href="https://www.imdb.com/title/tt<%= @movie.imdb_id %>" class="btn btn-primary">View on IMDB</a>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+</container>

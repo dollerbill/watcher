@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+    <h1>Invites</h1>
+  <br>
+  <div class="centered">
+    <h4>Invite a friend to find movies to watch together!</h4>
+    <div>
+      <%= button_to 'Send an Invite', new_invite_path, method: :get %>
+    </div>
+    <br>
+  <h4>Sent Invites</h4>
+  <br>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Invitee Name</th>
+      <th scope="col">Invitee Email</th>
+      <th scope="col">Invite Accepted?</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @invites.each do |invite| %>
+      <tr>
+        <th scope="row"></th>
+        <td><%= invite.invite_name %></td>
+        <td><%= invite.invite_email %></td>
+        <td><%= invite.accepted_at.nil? ? 'No' : 'Yes' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<!--</div>-->

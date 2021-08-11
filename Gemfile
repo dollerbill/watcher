@@ -13,6 +13,7 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 
 gem 'clearance'
+gem 'mailgun-ruby', '~> 1.2', '>= 1.2.5'
 gem 'plex-ruby'
 
 group :development, :test do

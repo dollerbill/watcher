@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<container>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col centered">
+      <p>Hi <%= @invite.invite_name %>, enter a password to finish registering an account for
+        <%= @invite.invite_email %></p>
+      <%= form_for @invite do |form| %>
+        <%= render partial: '/invites/password', locals: { form: form } %>
+        <br>
+        <div class="submit-field">
+          <%= form.submit 'Complete sign up' %>
+        </div>
+      <% end %>
+
+      </div>
+    <div class="col"></div>
+  </div>
+</container>
