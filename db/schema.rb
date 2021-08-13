@@ -53,19 +53,21 @@ ActiveRecord::Schema.define(version: 2021_08_12_053717) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_user_reactions_on_movie_id"
+    t.index ["reaction"], name: "index_user_reactions_on_reaction"
     t.index ["user_id"], name: "index_user_reactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "email", null: false
+    t.string "name", null: false
     t.string "encrypted_password", limit: 128, null: false
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
     t.string "streaming_services", default: [], null: false, array: true
-    t.bigint "group_id"
-    t.index ["email"], name: "index_users_on_email"
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
