@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_053717) do
+ActiveRecord::Schema.define(version: 2021_08_14_035950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_08_12_053717) do
 
   create_table "movies", force: :cascade do |t|
     t.string "name", null: false
-    t.string "streaming_service", null: false
+    t.string "streaming_services", null: false, array: true
     t.integer "length", null: false
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
