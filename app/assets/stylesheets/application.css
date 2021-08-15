@@ -43,3 +43,7 @@ h3 {
     padding: 1px 6px;
     text-decoration: none;
 }
+
+.sign-up-form {
+    display:inline-block;
+}

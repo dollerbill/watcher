@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   default from: 'notifications@example.com'
 
   def invite_email
-    binding.pry
+    # binding.pry
     @name = params[:invite_name]
     @email = params[:invite_email]
     @user = params[:user]

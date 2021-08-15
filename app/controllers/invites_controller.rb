@@ -28,7 +28,7 @@ class InvitesController < ApplicationController
     email = @invite.invite_email
     group_id = @invite.invited_by_user.group_id
     password = params['invite'].delete('password')
-    binding.pry
+    # binding.pry
     Clearance.configuration.user_model.new(user_params).tap do |user|
       user.email = email
       user.password = password
@@ -46,13 +46,13 @@ class InvitesController < ApplicationController
 
     # user = User.new(user_params)
     user = invite_user_params
-    binding.pry
+    # binding.pry
     if user.save
       @invite.update(token: nil)
       sign_in user
       redirect_back_or url_after_create
     else
-    binding.pry
+    # binding.pry
       render template: "users/new"
     end
     # send welcome email
