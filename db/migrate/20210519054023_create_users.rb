@@ -3,19 +3,15 @@
 class CreateUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :users do |t|
-      t.timestamps null: false
-      t.string :email, null: false
+      t.string :email, null: false, index: { unique: true }
+      t.string :name, null: false
       t.string :encrypted_password, limit: 128, null: false
       t.string :confirmation_token, limit: 128
-      t.string :remember_token, limit: 128, null: false
+      t.string :remember_token, limit: 128, null: false, index: true
       t.string :streaming_services, array: true, null: false, default: []
-      # t.string :partner_email, null: false
-      t.references :group
-      # t.references :user, :partner_user_id
-    end
+      t.references :group, null: false
 
-    add_index :users, :email
-    add_index :users, :remember_token
-    # add_index :users, :partner_email
+      t.timestamps
+    end
   end
 end

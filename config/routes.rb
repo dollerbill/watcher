@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'rated' => 'movies#rated'
   get 'recommended' => 'movies#recommended'
   get 'streaming_service' => 'movies#streaming_service'
-  # get 'invite' => 'users#invite'
   post 'reaction' => 'user_reactions#rate'
   post 'users' => 'users#create'
   root 'movies#rate'

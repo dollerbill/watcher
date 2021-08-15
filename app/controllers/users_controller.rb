@@ -1,32 +1,20 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+class UsersController < Clearance::UsersController
+  before_action :set_user, only: %i[show update]
 
-  # GET /users
-  def index
-    @users = User.all
-  end
+  # def user_invite_params
+  #   binding.pry
+  # end
 
-  # GET /users/1
-  def show; end
-
-  # GET /users/new
-  def new
-    binding.pry
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit; end
-
-  # POST /users
   def create
-    binding.pry
-    @user = User.new(user_params)
+    @user = user_from_params
+    @user.group_id = Group.create.id
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      sign_in @user
+      redirect_back_or url_after_create
     else
+      # render json: @user.errors
       render :new
     end
   end
@@ -40,25 +28,23 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
-  end
+  # TODO: disable account
+  # def destroy
+  #   @user.destroy
+  #   redirect_to users_url, notice: 'User was successfully destroyed.'
+  # end
 
-  def invite
-    # User.create(user_params)
-  end
+  # def invite
+  #   # User.create(user_params)
+  # end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:email, :group_id, :partner_email, :password)
+    params.require(:user).permit(:name, :email, :password, :group_id, streaming_services: [])
   end
 end
