@@ -2,5 +2,5 @@
 
 Clearance.configure do |config|
   config.rotate_csrf_on_sign_in = true
-  config.mailer_sender = 'mail@watcher-app.io'
+  config.mailer_sender = 'mail@watcher.fun'
 end
