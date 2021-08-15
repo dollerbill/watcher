@@ -1,9 +1,38 @@
-<div class="text-field">
-  <%= form.label :email %>
-  <%= form.text_field :email, type: 'email' %>
-</div>
+<% checkbox_options = { multiple: true, class: 'form-check-input' } %>
+<div class="container">
+  <div class="row">
+    <div class="col col-md-6">
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
 
-<div class="password-field">
-  <%= form.label :password %>
-  <%= form.password_field :password %>
+        <p>Available streaming platforms:</p>
+      <div class="form-check sign-up-form">
+        <div>
+        <%= form.check_box :streaming_services, checkbox_options, 'hbo', false %>
+        <%= form.label :plex, 'HBO Now' %>
+        <%= form.check_box :streaming_services, checkbox_options, 'hulu', false %>
+        <%= form.label :hulu, 'Hulu' %>
+        </div>
+        <%= form.check_box :streaming_services, checkbox_options, 'netflix', false %>
+        <%= form.label :netflix, 'Netflix' %>
+        <%= form.check_box :streaming_services, checkbox_options, 'prime', false %>
+        <%= form.label :prime, 'Prime Video' %>
+      </div>
+    </div>
+
+    <div class="col col-md-6">
+
+    <div class="text-field">
+      <%= form.label :email %>
+      <%= form.text_field :email, type: 'email' %>
+    </div>
+
+    <div class="password-field">
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+    </div>
+  </div>
 </div>

@@ -7,9 +7,11 @@
       <img src="<%= @movie.image_url %>" height="400" align="center" />
       <div class="centered">
         <h5> <%= @movie.name %> </h5>
-        <p> Available on: <%= @movie.streaming_service %> </p>
+        <p> Available on: <%= @movie.streaming_services.map(&:capitalize).sort.join(', ') %> </p>
         <p> Runtime: <%= @movie.length %> minutes </p>
-        <a href="https://www.imdb.com/title/tt<%= @movie.imdb_id %>" class="btn btn-primary">View on IMDB</a>
+        <a href="https://www.imdb.com/title/tt<%= @movie.imdb_id %>" class="btn btn-primary">
+          View on IMDB
+        </a>
       </div>
     </div>
     <div class="col"></div>

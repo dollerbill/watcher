@@ -10,64 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_807_210_901) do
+ActiveRecord::Schema.define(version: 2021_08_14_035950) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'citext'
-  enable_extension 'plpgsql'
+  enable_extension "citext"
+  enable_extension "plpgsql"
 
-  create_table 'groups', force: :cascade do |t|
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'invites', force: :cascade do |t|
-    t.string 'invite_name', null: false
-    t.citext 'invite_email', null: false
-    t.string 'token', null: false
-    t.bigint 'invited_by_user_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.datetime 'accepted_at'
-    t.datetime 'token_expires_at', null: false
-    t.index ['accepted_at'], name: 'index_invites_on_accepted_at'
-    t.index ['invite_email'], name: 'index_invites_on_invite_email', unique: true
-    t.index ['invited_by_user_id'], name: 'index_invites_on_invited_by_user_id'
-    t.index ['token'], name: 'index_invites_on_token', unique: true
+  create_table "invites", force: :cascade do |t|
+    t.string "invite_name", null: false
+    t.citext "invite_email", null: false
+    t.string "token", null: false
+    t.bigint "invited_by_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "accepted_at"
+    t.datetime "token_expires_at", null: false
+    t.index ["accepted_at"], name: "index_invites_on_accepted_at"
+    t.index ["invite_email"], name: "index_invites_on_invite_email", unique: true
+    t.index ["invited_by_user_id"], name: "index_invites_on_invited_by_user_id"
+    t.index ["token"], name: "index_invites_on_token", unique: true
   end
 
-  create_table 'movies', force: :cascade do |t|
-    t.string 'name', null: false
-    t.string 'streaming_service', null: false
-    t.integer 'length', null: false
-    t.string 'user_1_reaction'
-    t.string 'user_2_reaction'
-    t.string 'image_url'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.string 'imdb_id'
+  create_table "movies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "streaming_services", null: false, array: true
+    t.integer "length", null: false
+    t.string "image_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "imdb_id"
   end
 
-  create_table 'user_reactions', force: :cascade do |t|
-    t.bigint 'movie_id', null: false
-    t.bigint 'user_id', null: false
-    t.integer 'reaction', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.index ['movie_id'], name: 'index_user_reactions_on_movie_id'
-    t.index ['user_id'], name: 'index_user_reactions_on_user_id'
+  create_table "user_reactions", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "reaction", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_user_reactions_on_movie_id"
+    t.index ["reaction"], name: "index_user_reactions_on_reaction"
+    t.index ["user_id"], name: "index_user_reactions_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.string 'email', null: false
-    t.string 'encrypted_password', limit: 128, null: false
-    t.string 'confirmation_token', limit: 128
-    t.string 'remember_token', limit: 128, null: false
-    t.string 'streaming_services', default: [], null: false, array: true
-    t.bigint 'group_id'
-    t.index ['email'], name: 'index_users_on_email'
-    t.index ['group_id'], name: 'index_users_on_group_id'
-    t.index ['remember_token'], name: 'index_users_on_remember_token'
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128, null: false
+    t.string "streaming_services", default: [], null: false, array: true
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
+
 end

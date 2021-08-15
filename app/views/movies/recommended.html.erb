@@ -11,7 +11,9 @@
             <img src="<%= movie.image_url %>" style="max-height: 600px;" />
             <div class="card-body">
               <p class="card-text"><%= movie.name %></p>
-              <p class="card-text">Available on <%= movie.streaming_service.capitalize %> </p>
+              <p class="card-text">
+                Available on <%= movie.streaming_services.map(&:capitalize).sort.join(', ') %>
+              </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <%= button_to 'Details', movie_path(movie), method: :get %>
