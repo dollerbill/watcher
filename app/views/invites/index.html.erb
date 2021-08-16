@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<% def cancel(invite) %>
+  <% button_to 'Cancel', invite_path(invite), method: :delete %>
+<% end %>
     <h1>Invites</h1>
   <br>
   <div class="centered">
@@ -7,9 +10,11 @@
       <%= button_to 'Send an Invite', new_invite_path, method: :get %>
     </div>
     <br>
+    <br>
+    <br>
   <h4>Sent Invites</h4>
   <br>
-  </div>
+
   <table class="table">
     <thead>
     <tr>
@@ -17,6 +22,7 @@
       <th scope="col">Invitee Name</th>
       <th scope="col">Invitee Email</th>
       <th scope="col">Invite Accepted?</th>
+      <th scope="col">Cancel Invite</th>
     </tr>
     </thead>
     <tbody>
@@ -26,8 +32,9 @@
         <td><%= invite.invite_name %></td>
         <td><%= invite.invite_email %></td>
         <td><%= invite.accepted_at.nil? ? 'No' : 'Yes' %></td>
+        <td><%= invite.accepted_at.nil? ? cancel(invite) : 'Invite has already been accepted' %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
-<!--</div>-->
+</div>
