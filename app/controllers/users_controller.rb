@@ -3,10 +3,6 @@
 class UsersController < Clearance::UsersController
   before_action :set_user, only: %i[show update]
 
-  # def user_invite_params
-  #   binding.pry
-  # end
-
   def create
     @user = user_from_params
     @user.group_id = Group.create.id
@@ -17,6 +13,10 @@ class UsersController < Clearance::UsersController
       # render json: @user.errors
       render :new
     end
+  end
+
+  def user_from_params
+    super
   end
 
   # PATCH/PUT /users/1
@@ -32,10 +32,6 @@ class UsersController < Clearance::UsersController
   # def destroy
   #   @user.destroy
   #   redirect_to users_url, notice: 'User was successfully destroyed.'
-  # end
-
-  # def invite
-  #   # User.create(user_params)
   # end
 
   private
