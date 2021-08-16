@@ -1,9 +1,11 @@
-Welcome to example.com, <%= @name %>
+<%= @name %>, you've been invited to Watcher!
 ===============================================
 
-You have successfully signed up to example.com,
-your username is: <%= @email %>.
+Hi <%=@name %>, <%= @user.name %> has invited you to
+join Watcher so you can find movies to watch together.
 
-To login to the site, just follow this link: <%= @url %>.
+If you'd like to join <%= @user.name %>, just follow this link
+  and complete your registration:
+  <%= @url %>.
 
-Thanks for joining and have a great day!
+Thanks, and we hope to see you soon!

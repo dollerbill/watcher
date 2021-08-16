@@ -7,6 +7,7 @@ class UsersController < Clearance::UsersController
     @user = user_from_params
     @user.group_id = Group.create.id
     if @user.save
+      UserMailer.with(user: @user).welcome_email.deliver_now
       sign_in @user
       redirect_back_or url_after_create
     else
