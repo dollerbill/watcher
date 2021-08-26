@@ -1,24 +1,7 @@
-# README
+# Watcher
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Take the guess work out of your next movie night!
 
-Things you may want to cover:
+Easily pick movies everyone wants to see, with Watcher.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Available at: https://watcher-movie.herokuapp.com/

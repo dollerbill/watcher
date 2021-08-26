@@ -1,8 +1,11 @@
-<h2>Invite a friend</h2>
-<%= form_for @invite do |form| %>
-  <%= render partial: '/invites/form', locals: {form: form} %>
-<br>
-  <div class="submit-field">
-    <%= form.submit 'Send Invite' %>
-  </div>
-<% end %>
+<p id="notice"><%= notice %></p>
+<div class="centered">
+  <h2 class="bottom-space">Invite a friend</h2>
+  <%= form_for @invite do |form| %>
+    <%= render partial: '/invites/form', locals: {form: form} %>
+  <br>
+    <div class="submit-field">
+      <%= form.submit 'Send Invite' %>
+    </div>
+  <% end %>
+</div>

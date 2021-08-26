@@ -14,17 +14,17 @@ class InvitesController < ApplicationController
     end
   end
 
+  def destroy
+    @invite.destroy
+    redirect_to invites_url
+  end
+
   def index
     @invites = Invite.where(invited_by_user: current_user).order(:created_at)
   end
 
   def new
     @invite = Invite.new
-  end
-
-  def destroy
-    @invite.destroy
-    redirect_to invites_url
   end
 
   def show; end
@@ -35,7 +35,7 @@ class InvitesController < ApplicationController
     if @user.save
       @invite.update(token: nil, accepted_at: Time.now)
       sign_in @user
-      redirect_to root_path
+      redirect_to welcome_path
     else
       render template: 'users/new'
     end

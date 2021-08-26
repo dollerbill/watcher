@@ -20,7 +20,6 @@ class UsersController < Clearance::UsersController
     super
   end
 
-  # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
@@ -28,6 +27,8 @@ class UsersController < Clearance::UsersController
       render :edit
     end
   end
+
+  def welcome; end
 
   # TODO: disable account
   # def destroy

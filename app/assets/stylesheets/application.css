@@ -14,8 +14,10 @@
  *= require_self
  */
 
-.user-status {
-    margin-top: 2.5em;
+body {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1280px;
 }
 
 h1 {
@@ -26,8 +28,16 @@ h3 {
     text-align: center;
 }
 
+.bottom-space {
+    margin-bottom: 1em;
+}
+
 .centered {
     text-align: center;
+}
+
+.invite-button {
+    margin-bottom: 2.5em;
 }
 
 .link-to a {
@@ -44,6 +54,19 @@ h3 {
     text-decoration: none;
 }
 
+.poster {
+    height: 320px;
+    text-align: center;
+}
+
 .sign-up-form {
     display:inline-block;
+}
+
+.top-space {
+    margin-bottom: 1em;
+}
+
+.user-status {
+    margin-top: 2.5em;
 }

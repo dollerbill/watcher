@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rated Movies</h1>
+
+
+<div class="album py-5 bg-dark">
+  <div class="container">
+    <div class="row">
+        <%= form_with url: rated_path, method: :get, model: Movie do |form| %>
+          <%= form.select :streaming_service, %w[hulu netflix plex prime]%>
+          <%= form.submit "Filter" %>
+        <% end %>
+
+        <br>
+        <%= button_to "All movies", rated_path, method: :get %>
+    </div>
+
+    <div class="row">
+    <% @movies.each do |movie| %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img src="<%= movie.image_url %>" style="max-height: 600px;" />
+          <div class="card-body">
+            <p class="card-text"><%= movie.name %></p>
+            <p class="card-text">
+              Available on <%= movie.streaming_services.map(&:capitalize).sort.join(', ') %>
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <%= button_to 'Details', movie_path(movie), method: :get %>
+              </div>
+              <small class="text-muted"><%= movie.length %> minutes</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
