@@ -5,4 +5,5 @@
 
 .container.rate {
     text-align: center;
+    max-width: 1080px;
 }

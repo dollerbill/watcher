@@ -20,7 +20,7 @@
       <% @movies.each do |movie| %>
         <div class="col-md-6">
           <div class="card mb-6 shadow-sm">
-            <img src="<%= movie.image_url %>" style="max-height: 600px;" />
+            <%= image_tag("movie_posters/#{movie.image_path}", style:'max-height: 600px; width: auto') if movie.image_path %>
             <div class="card-body">
               <p class="card-text"><%= movie.name %></p>
               <p class="card-text">

@@ -8,6 +8,7 @@
 /.bundle
 
 .env
+app/assets/images/movie_posters
 
 # Common editors
 .idea/

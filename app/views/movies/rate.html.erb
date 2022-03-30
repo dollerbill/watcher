@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col"></div>
         <div class="col">
-          <img class="bottom-space" src="<%= @movie.image_url %>" height="400" />
+          <%= image_tag("movie_posters/#{@movie.image_path}", height: 400, class: 'bottom-space') if @movie.image_path %>
 
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-secondary bottom-space" data-toggle="modal" data-target="#movie-popup-modal">

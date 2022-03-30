@@ -13,9 +13,7 @@ class MoviesController < ApplicationController
   end
 
   def recommended
-    ids = current_user.group.user_reactions.positive.map(&:movie_id).then do |r|
-      r.select { |e| r.count(e) == current_user.group.users.count }.uniq
-    end
+    ids = current_user.recommended_movies
     @movies = Movie.where(id: ids)
     render :rate_movies if @movies.empty?
 

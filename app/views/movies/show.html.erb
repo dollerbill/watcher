@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col"></div>
     <div class="col" align="center">
-      <img src="<%= @movie.image_url %>" height="400" align="center" />
+      <%= image_tag("movie_posters/#{@movie.image_path}", height: 400) if @movie.image_path %>
       <div class="centered">
         <h5> <%= @movie.name %> </h5>
         <p> Available on: <%= @movie.streaming_services.map(&:capitalize).sort.join(', ') %> </p>

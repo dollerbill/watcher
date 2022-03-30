@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col"></div>
     <div class="col" align="center">
-      <img src="<%= @movie.image_url %>" class="poster" />
+      <%= image_tag("movie_posters/#{@movie.image_path}", class:'poster') if @movie.image_path %>
 
       <div class="centered bottom-space">
         <p> Available on: <%= @movie.streaming_services.map(&:capitalize).sort.join(', ') %> </p>
@@ -17,7 +17,7 @@
         <%= @movie.description %>
       </div>
 
-        <a href="https://www.imdb.com/title/tt<%= @movie.imdb_id %>" class="btn btn-primary">
+        <a href="https://www.imdb.com/title/<%= @movie.imdb_id %>" class="btn btn-primary">
           View on IMDB
         </a>
 

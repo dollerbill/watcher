@@ -17,14 +17,28 @@ class User < ApplicationRecord
     names
   end
 
-  def recommended_watch_message
+  def group_ids
+    group.users.map(&:id).except(:id)
+  end
+
+  def recommended_movies
+    group.user_reactions.positive.map(&:movie_id).then do |reaction|
+      reaction.select { |r| reaction.count(r) == group.users.count }.uniq
+    end
+  end
+
+  def group_name_prefix
     case group_names.count
     when 0
-      'You liked these movies: '
+      'You'
     when 1
-      "You and #{group_names[0]} both liked these movies: "
+      "You and #{group_names[0]}"
     else
-      "#{group_names.join(', ')}, and you all liked these movies: "
+      "#{group_names.join(', ')}, and you"
     end
+  end
+
+  def recommended_watch_message
+    "#{group_name_prefix} liked these movies"
   end
 end

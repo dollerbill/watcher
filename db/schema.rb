@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_25_061804) do
+ActiveRecord::Schema.define(version: 2022_03_28_052848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_08_25_061804) do
     t.string "imdb_id"
     t.string "description"
     t.string "release_year"
+    t.string "image_path"
   end
 
   create_table "user_reactions", force: :cascade do |t|
