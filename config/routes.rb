@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'rated' => 'movies#rated'
   get 'recommended' => 'movies#recommended'
   get 'welcome' => 'users#welcome'
   post 'reaction' => 'user_reactions#rate'

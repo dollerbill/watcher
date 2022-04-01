@@ -1,6 +1,0 @@
-<% if current_user.user_reactions.positive.count == 0 %>
-  <h2>You don't have any recommendations yet, go pick your first movie!</h2>
-<% elsif current_user.recommended_movies.count == 0 %>
-  <h2> <%= current_user.group_name_prefix %> haven't agreed on any movies yet. Keep rating to find something to watch! </h2>
-<% end %>
-<%= link_to 'Rate a movie!', root_path %>
