@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :bigint           not null, primary key
+#  email              :string           not null
+#  name               :string           not null
+#  encrypted_password :string(128)      not null
+#  confirmation_token :string(128)
+#  remember_token     :string(128)      not null
+#  streaming_services :string           default([]), not null, is an Array
+#  group_id           :bigint           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
 class User < ApplicationRecord
   include Clearance::User
 
