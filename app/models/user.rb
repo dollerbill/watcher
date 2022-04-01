@@ -21,6 +21,11 @@ class User < ApplicationRecord
     group.users.map(&:id).except(:id)
   end
 
+  def positive_movies
+    Movie.joins(:user_reactions)
+         .where("user_reactions.reaction = 1 AND user_reactions.user_id = #{id}")
+  end
+
   def recommended_movies
     group.user_reactions.positive.map(&:movie_id).then do |reaction|
       reaction.select { |r| reaction.count(r) == group.users.count }.uniq

@@ -9,7 +9,7 @@
         <h5> <%= @movie.name %> </h5>
         <p> Available on: <%= @movie.streaming_services.map(&:capitalize).sort.join(', ') %> </p>
         <p> Runtime: <%= @movie.length %> minutes </p>
-        <a href="https://www.imdb.com/title/tt<%= @movie.imdb_id %>" class="btn btn-primary">
+        <a href="https://www.imdb.com/title/<%= @movie.imdb_id %>" class="btn btn-primary">
           View on IMDB
         </a>
       </div>

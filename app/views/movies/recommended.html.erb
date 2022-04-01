@@ -1,28 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Your Personalized Movie Recommendations</h1>
-<h4><%= current_user.recommended_watch_message %></h4>
 <div class="album py-5 bg-dark">
   <div class="container">
     <div class="row">
-      <% @movies.each do |movie| %>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <%= image_tag("movie_posters/#{movie.image_path}", style:'max-height: 600px; width: auto') if movie.image_path %>
-            <div class="card-body">
-              <p class="card-text"><%= movie.name %></p>
-              <p class="card-text">
-                Available on <%= movie.streaming_services.map(&:capitalize).sort.join(', ') %>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <%= button_to 'Details', movie_path(movie), method: :get %>
+      <% @user_movies.each do |user_movie| %>
+        <% if user_movie[:movies].empty? %>
+          <h3>You and <%= user_movie[:user].name %> haven't found any movies to watch yet!</h3>
+        <% else %>
+          <h3> Your movie recommendations with <%= user_movie[:user].name %>: </h3>
+          <% user_movie[:movies].each do |movie| %>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <%= image_tag("movie_posters/#{movie.image_path}", style:'max-height: 600px; width: auto') if movie.image_path %>
+                <div class="card-body">
+                  <p class="card-text"><%= movie.name %></p>
+                  <p class="card-text">
+                    Available on <%= movie.streaming_services.map(&:capitalize).sort.join(', ') %>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <%= button_to 'Details', movie_path(movie), method: :get %>
+                    </div>
+                    <small class="text-muted"><%= movie.length %> minutes</small>
+                  </div>
                 </div>
-                <small class="text-muted"><%= movie.length %> minutes</small>
               </div>
             </div>
-          </div>
-        </div>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

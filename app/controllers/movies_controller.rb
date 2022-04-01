@@ -13,10 +13,9 @@ class MoviesController < ApplicationController
   end
 
   def recommended
-    ids = current_user.recommended_movies
-    @movies = Movie.where(id: ids)
-    render :rate_movies if @movies.empty?
-
+    @user_movies = current_user.group.users.map do |user|
+      { user: user, movies: user.positive_movies & current_user.positive_movies }
+    end
     # one sql query/ join
     # Movie.joins(user_reactions: [user: [:group]]).where('user_id like', current_user.id).count
   end
