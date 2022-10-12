@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
@@ -15,6 +15,10 @@ gem 'puma', '~> 5.0'
 gem 'clearance'
 gem 'mailgun-ruby', '~> 1.2', '>= 1.2.5'
 gem 'plex-ruby'
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+
 
 group :development, :test do
   gem 'dotenv-rails'

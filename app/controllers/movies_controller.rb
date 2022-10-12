@@ -13,11 +13,7 @@ class MoviesController < ApplicationController
   end
 
   def recommended
-    @user_movies = current_user.group.users.map do |user|
-      { user: user, movies: user.positive_movies & current_user.positive_movies }
-    end
-    # one sql query/ join
-    # Movie.joins(user_reactions: [user: [:group]]).where('user_id like', current_user.id).count
+    @user_movies = Movie.recommended(current_user)
   end
 
   def show
@@ -27,8 +23,6 @@ class MoviesController < ApplicationController
   private
 
   def previously_rated
-    Movie.joins(:user_reactions)
-         .where("user_reactions.reaction = 1 AND user_reactions.user_id = #{current_user.id}")
-         .map(&:id)
+    Movie.joins(:user_reactions).where(user_reactions: { reaction: 1, user: current_user }).map(&:id)
   end
 end

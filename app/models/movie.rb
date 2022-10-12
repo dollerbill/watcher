@@ -19,4 +19,12 @@
 class Movie < ApplicationRecord
   has_many :user_reactions
   has_many :users, through: :user_reactions
+
+  def recommended(user)
+    user.group.users.map do |u|
+      { user: u, movies: u.positive_movies & user.positive_movies }
+    end
+    # TODO: better query
+    # Movie.joins(user_reactions: [user: [:group]]).where('user_id like', current_user.id)
+  end
 end
