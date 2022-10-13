@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
   end
 
   def recommended
-    @user_movies = Movie.recommended(current_user)
+    @user_movies = current_user.recommended
   end
 
   def show

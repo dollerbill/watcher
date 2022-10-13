@@ -41,9 +41,12 @@ class User < ApplicationRecord
          .where("user_reactions.reaction = 1 AND user_reactions.user_id = #{id}")
   end
 
-  def recommended_movies
-    group.user_reactions.positive.map(&:movie_id).then do |reaction|
-      reaction.select { |r| reaction.count(r) == group.users.count }.uniq
+  def recommended
+    # TODO: better query
+    # Movie.joins(user_reactions: [user: [:group]]).where('user_id like', current_user.id)
+
+    group.users.map do |u|
+      { user: u, movies: u.positive_movies & positive_movies }
     end
   end
 
