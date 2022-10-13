@@ -19,4 +19,10 @@
 class Movie < ApplicationRecord
   has_many :user_reactions
   has_many :users, through: :user_reactions
+
+  def image_at_path?
+    # TODO: update when image_path is properly filled
+    # image_path && File.file?(Rails.root.join('app/assets/images/movie_posters/image_path'))
+    image_path && File.file?(Rails.root.join("app/assets/images/movie_posters/#{name}.jpg"))
+  end
 end

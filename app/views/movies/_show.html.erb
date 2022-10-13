@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col"></div>
     <div class="col" align="center">
-      <%= image_tag("movie_posters/#{@movie.image_path}", class:'poster') if @movie.image_path %>
+      <%= image_tag("movie_posters/#{@movie.image_path}", class:'poster') if @movie.image_at_path? %>
 
       <div class="centered bottom-space">
         <p> Available on: <%= @movie.streaming_services.map(&:capitalize).sort.join(', ') %> </p>
