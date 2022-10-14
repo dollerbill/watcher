@@ -1,9 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<% def cancel(invite) %>
-  <% button_to 'Cancel', invite_path(invite), method: :delete %>
-<% end %>
-
 <h1 class="bottom-space">Invites</h1>
 <div class="centered">
 <% if @invites.none? %>
@@ -32,7 +28,12 @@
         <td><%= invite.invite_name %></td>
         <td><%= invite.invite_email %></td>
         <td><%= invite.accepted_at.nil? ? 'No' : 'Yes' %></td>
-        <td><%= invite.accepted_at.nil? ? cancel(invite) : 'Invite was already accepted' %></td>
+        <td>
+          <% if invite.accepted_at.nil? %>
+            <%= button_to 'Cancel', invite_path(invite), method: :delete %>
+          <% else %>
+            <p>Invite was already accepted</p>
+          <% end %>
       </tr>
       <% end %>
     </tbody>

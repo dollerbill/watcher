@@ -25,28 +25,24 @@ class User < ApplicationRecord
   has_many :movies, through: :user_reactions
 
   def group_names
-    names = group.users.map(&:name)
-    return [] if names.count == 1
-
-    names.delete(name)
-    names
+    group.users.map(&:name) - [name]
   end
 
   def group_ids
-    group.users.map(&:id).except(:id)
+    group.users.map(&:id) - [id]
   end
 
   def positive_movies
-    Movie.joins(:user_reactions)
-         .where("user_reactions.reaction = 1 AND user_reactions.user_id = #{id}")
+    user_reactions.where(reaction: 1).map(&:movie)
   end
 
-  def recommended
-    # TODO: better query
-    # Movie.joins(user_reactions: [user: [:group]]).where('user_id like', current_user.id)
+  def previously_rated
+    user_reactions.map(&:movie_id)
+  end
 
-    group.users.map do |u|
-      { user: u, movies: u.positive_movies & positive_movies }
+  def recommended_movies
+    (group.users - [self]).map do |user|
+      { user:, movies: user.positive_movies & positive_movies }
     end
   end
 

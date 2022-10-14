@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+  delegate :previously_rated, :recommended_movies, to: :current_user
 
   def index
     @movies = Movie.all
@@ -13,16 +14,10 @@ class MoviesController < ApplicationController
   end
 
   def recommended
-    @user_movies = current_user.recommended
+    @user_movies = recommended_movies
   end
 
   def show
     @movie = Movie.find(params[:id])
-  end
-
-  private
-
-  def previously_rated
-    Movie.joins(:user_reactions).where(user_reactions: { reaction: 1, user: current_user }).map(&:id)
   end
 end
